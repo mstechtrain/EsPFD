@@ -8,6 +8,15 @@ let data = {
   Ps2: 0,
 };
 
+let options = { acceptAllDevices: true };
+
+function testBT() {
+  navigator.bluetooth.requestDevice(options).then((device) => {
+    // currentText.innerHTML = device.name;
+    console.log(device.name);
+  });
+}
+
 for (const item in data) {
   data[item] = Math.random() * 10;
 }
@@ -32,9 +41,6 @@ function insertText(text) {
 
 // console.log(data);
 
-
-setInterval(function(){
-currentText.innerHTML = "<h1> IT WORKS! </h1>";
-navigator.bluetooth.requestDevice(options.acceptAllDevices=true).then((device)=>{currentText.innerHTML = device.name})
-
-}, 5000);
+setInterval(function () {
+  currentText.innerHTML = "<h1> IT WORKS! </h1>";
+}, 1000);

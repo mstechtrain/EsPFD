@@ -1,5 +1,8 @@
 {
-  "airData": {
-    "title": { "string": {} }
+  "Post": {
+    "pSv1": { "int": { "min": 0, "max": 5000 } },
+    "pTv1": { "int": { "min": 0, "max": 5000 } },
+    "pSv2": { "int": { "min": 0, "max": 5000 } },
+    "pTv2": { "int": { "min": 0, "max": 5000 } }
   }
 }

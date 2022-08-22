@@ -7,20 +7,19 @@ let espData = {
   Ps2: 0,
 };
 
-let aSchange = -.1;
-let aFchange = -200
+let aSchange = -0.1;
+let aFchange = -200;
 
 setInterval(() => {
-  if (espData.airSpeed > 30 && espData.airSpeed < 250)
-    espData.airSpeed += aSchange;
-  else if (espData.airSpeed <= 30) {
-    aSchange = .1;
-    espData.airSpeed += aSchange;
-  } else if (espData.airSpeed >= 250) {
-    aSchange = -.1;
-    espData.airSpeed += aSchange;
+  if (espData.airSpeed > 30 && espData.airSpeed < 250) {
+    espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
+  } else if (espData.airSpeed <= 30) {
+    aSchange = 0.1;
+    espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
+  } else if ((espData.airSpeed = 250)) {
+    aSchange = -0.1;
+    espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
   }
-
 
   if (espData.altFeet > -1000 && espData.altFeet < 30000)
     espData.altFeet += aFchange;
@@ -31,7 +30,7 @@ setInterval(() => {
     aFchange = -2;
     espData.altFeet += aFchange;
   }
-  }, 20);
+}, 20);
 
 // for (const item in espData) {
 //   espData[item] = Math.random() * 10;

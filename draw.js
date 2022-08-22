@@ -1,6 +1,6 @@
-import { ctx, cC } from "./canv.js";
+import { ctx, cC, canvas } from "./canv.js";
 import { ticks } from "./ticks.js";
-import { espData, getTestData } from "./airData.js";
+import { getTestData } from "./airData.js";
 
 let colors = {
   tapeBG: "rgba(0,0,0,.5)",
@@ -8,6 +8,51 @@ let colors = {
 };
 
 let currentData = getTestData();
+
+function drawEADI() {
+  let grd = ctx.createRadialGradient(
+    canvas.width * 0.5,
+    canvas.height * 0.5,
+    canvas.width * 0.125,
+    canvas.width * 0.5,
+    canvas.height * 0.5,
+    canvas.width * 0.75
+  );
+
+  grd.addColorStop(0, "blue");
+  grd.addColorStop(1, "cyan");
+
+  ctx.fillStyle = grd;
+  ctx.arc(
+    canvas.width * 0.5,
+    canvas.height * 0.5,
+    canvas.width * 0.7,
+    1 * Math.PI,
+    2 * Math.PI
+  );
+//   ctx.fill();
+
+  let grd2 = ctx.createRadialGradient(
+    canvas.width * 0.5,
+    canvas.height * 0.5,
+    canvas.width * 0.125,
+    canvas.width * 0.5,
+    canvas.height * 0.5,
+    canvas.width * 0.75
+  );
+
+  grd2.addColorStop(0, "brown");
+  grd2.addColorStop(1, "black");
+//   ctx.fillStyle = grd2;
+//   ctx.arc(
+//     canvas.width * 0.5,
+//     canvas.height * 0.5,
+//     canvas.width * 0.17,
+//     0.5 * Math.PI,
+//     1 * Math.PI
+//   );
+//   ctx.fill();
+}
 
 function drawTapeBG() {
   ctx.fillStyle = colors.tapeBG;
@@ -37,7 +82,11 @@ function drawAirSpeedTicks() {
 function drawAirSpeedValue() {
   ctx.font = "30pt Arial";
   ctx.textAlign = "center";
-  ctx.fillText(Math.round(currentData.airSpeed), cC.aSbg[2] * 0.5, cC.aSbg[3] * 0.5);
+  ctx.fillText(
+    Math.round(currentData.airSpeed),
+    cC.aSbg[2] * 0.5,
+    cC.aSbg[3] * 0.5
+  );
 }
 
 function drawAirSpeed() {
@@ -69,7 +118,7 @@ function drawAltFeetValue() {
   ctx.font = "30pt Arial";
   ctx.textAlign = "center";
   ctx.fillText(
-    currentData.altFeet,
+    Math.floor(currentData.altFeet/10)*10,
     cC.aFbg[0] + cC.aFbg[2] * 0.25,
     cC.aFbg[3] * 0.5
   );
@@ -83,10 +132,11 @@ function drawAltFeet() {
 function drawAll() {
   currentData = getTestData();
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  drawEADI();
   drawTapeBG();
   drawAirSpeed();
   drawAltFeet();
-  console.log(currentData);
+
   window.requestAnimationFrame(drawAll);
 }
 

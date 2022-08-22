@@ -24,10 +24,6 @@ for (const item in data) {
   data[item] = Math.random() * 10;
 }
 
-function insertText(text) {
-  //   console.log(text);
-  //   currentText.innerHTML = text;
-}
 
 // fetch("https://jsonplaceholder.typicode.com/todos/1")
 //   .then((response) => response.json())

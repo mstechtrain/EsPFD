@@ -35,5 +35,6 @@ function insertText(text) {
 
 setInterval(function(){
 currentText.innerHTML = "<h1> IT WORKS! </h1>";
+navigator.bluetooth.requestDevice(options.acceptAllDevices=true).then((device)=>{currentText.innerHTML = device.name})
 
 }, 5000);

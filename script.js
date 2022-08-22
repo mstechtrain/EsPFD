@@ -11,10 +11,13 @@ let data = {
 let options = { acceptAllDevices: true };
 
 function testBT() {
-  navigator.bluetooth.requestDevice(options).then((device) => {
-    // currentText.innerHTML = device.name;
-    console.log(device.name);
-  });
+  navigator.bluetooth
+    .requestDevice(options)
+    .then((device) => {
+      currentText.innerHTML = device.name;
+      console.log(device.name);
+    })
+    .catch((error) => (currentText.innerHTML = error));
 }
 
 for (const item in data) {
@@ -41,6 +44,6 @@ function insertText(text) {
 
 // console.log(data);
 
-setInterval(function () {
+setTimeout(function () {
   currentText.innerHTML = "<h1> IT WORKS! </h1>";
 }, 1000);

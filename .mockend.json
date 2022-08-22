@@ -1,5 +1,7 @@
 {
   "Post": {
+    "airSpeed1": { "int": { "min": 30, "max": 40 } },
+    "altFeet1": { "int": { "min": -100, "max": 15000 } },
     "pSv1": { "int": { "min": 0, "max": 5000 } },
     "pTv1": { "int": { "min": 0, "max": 5000 } },
     "pSv2": { "int": { "min": 0, "max": 5000 } },

@@ -11,17 +11,16 @@ let ctxaF = afCanvas.getContext("2d");
 
 function updatecC() {
   cC = {
-    aSbg: [0, 0, asCanvas.width, asCanvas.height],
-    aFbg: [0, 0, afCanvas.width, afCanvas.height],
+    aSaFbg: [0, 0, asCanvas.width, asCanvas.height],
   };
 }
 
 const resize = () => {
-  ctxaS.canvas.width = window.innerWidth*.2;
+  ctxaS.canvas.width = window.innerWidth * 0.2;
   ctxaS.canvas.height = window.innerHeight;
   ctxeadi.canvas.width = window.innerWidth;
   ctxeadi.canvas.height = window.innerHeight;
-  ctxaF.canvas.width = window.innerWidth*.2;
+  ctxaF.canvas.width = window.innerWidth * 0.2;
   ctxaF.canvas.height = window.innerHeight;
   updatecC();
   drawAll();

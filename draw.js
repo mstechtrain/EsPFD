@@ -1,4 +1,4 @@
-import { cC, ctxaS, ctxaF, ctxeadi} from "./canv.js";
+import { cC, ctxaS, ctxaF, ctxeadi } from "./canv.js";
 import { ticks } from "./ticks.js";
 import { getTestData } from "./airData.js";
 
@@ -56,9 +56,9 @@ let currentData = getTestData();
 
 function drawTapeBG() {
   ctxaS.fillStyle = colors.tapeBG;
-  ctxaS.fillRect(...cC.aSbg);
+  ctxaS.fillRect(...cC.aSaFbg);
   ctxaF.fillStyle = colors.tapeBG;
-  ctxaF.fillRect(...cC.aFbg);
+  ctxaF.fillRect(...cC.aSaFbg);
 }
 
 function drawAirSpeedTicks() {
@@ -119,7 +119,7 @@ function drawAltFeetValue() {
   ctx.font = "30pt Arial";
   ctx.textAlign = "center";
   ctx.fillText(
-    Math.floor(currentData.altFeet/10)*10,
+    Math.floor(currentData.altFeet / 10) * 10,
     cC.aFbg[0] + cC.aFbg[2] * 0.25,
     cC.aFbg[3] * 0.5
   );

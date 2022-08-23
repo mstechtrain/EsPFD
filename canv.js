@@ -1,20 +1,28 @@
 import { drawAll } from "./draw.js";
 
-let canvas = document.getElementById("myCanvas");
+let asCanvas = document.getElementById("asCanvas");
+let eadiCanvas = document.getElementById("eadiCanvas");
+let afCanvas = document.getElementById("afCanvas");
 
 let cC = { aSbg: [], aFbg: [] };
-let ctx = canvas.getContext("2d");
+let ctxaS = asCanvas.getContext("2d");
+let ctxeadi = eadiCanvas.getContext("2d");
+let ctxaF = afCanvas.getContext("2d");
 
 function updatecC() {
   cC = {
-    aSbg: [0, 0, canvas.width * 0.2, canvas.height],
-    aFbg: [canvas.width * 0.8, 0, canvas.width * 0.2, canvas.height],
+    aSbg: [0, 0, asCanvas.width, asCanvas.height],
+    aFbg: [0, 0, afCanvas.width, afCanvas.height],
   };
 }
 
 const resize = () => {
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
+  ctxaS.canvas.width = window.innerWidth*.2;
+  ctxaS.canvas.height = window.innerHeight;
+  ctxeadi.canvas.width = window.innerWidth;
+  ctxeadi.canvas.height = window.innerHeight;
+  ctxaF.canvas.width = window.innerWidth*.2;
+  ctxaF.canvas.height = window.innerHeight;
   updatecC();
   drawAll();
 };
@@ -22,4 +30,4 @@ const resize = () => {
 resize();
 window.addEventListener("resize", resize);
 
-export { cC, ctx, canvas, updatecC };
+export { cC, ctxaS, ctxaF, ctxeadi, updatecC };

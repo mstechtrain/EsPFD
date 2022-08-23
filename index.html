@@ -8,10 +8,24 @@
   </head>
   <body>
     <canvas
-      id="myCanvas"
+      id="asCanvas"
       width="200"
       height="100"
-      style="border: 1px solid #000000"
+      style="position: absolute; left: 0px; z-index: 1; border: 1px solid #000000"
+    ></canvas>
+
+    <canvas
+      id="eadiCanvas"
+      width="200"
+      height="100"
+      style="position: absolute; z-index: -1; border: 1px solid #000000"
+    ></canvas>
+
+    <canvas
+      id="afCanvas"
+      width="200"
+      height="100"
+      style="position: absolute; right: 0px; z-index: 1; border: 1px solid #000000"
     ></canvas>
   </body>
   <script type="module" src="script.js"></script>

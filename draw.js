@@ -69,6 +69,7 @@ function drawEADI() {
 
 function drawAirSpeedTicks() {
   ctxaS.fillStyle = colors.ticks;
+  ctxaS.textBaseline = "middle";
   ctxaS.font = "26pt Arial";
   ctxaS.textAlign = "center";
   let currentTicks = ticks.airSpeedTicks.filter((element) => {
@@ -83,12 +84,19 @@ function drawAirSpeedTicks() {
       cC.aSaFbg[2] * 0.5,
       cC.aSaFbg[3] * 0.5 - (value - currentData.airSpeed) * 15
     );
+    // ctxaS.fillRect(
+    //   cC.aSaFbg[2] * 0,
+    //   cC.aSaFbg[3] * 0.5 - value,
+    //   cC.aSaFbg[2] * 1,
+    //   (cC.aSaFbg[3] * 0.5) - (value + 1) * -.05
+    // );
   });
 }
 
 function drawAirSpeedValue() {
   ctxaS.font = "30pt Arial";
   ctxaS.textAlign = "center";
+  ctxaS.textBaseline = "middle";
   ctxaS.fillText(
     Math.round(currentData.airSpeed),
     cC.aSaFbg[2] * 0.5,
@@ -104,6 +112,7 @@ function drawAirSpeed() {
 
 function drawAltFeetTicks() {
   ctxaF.fillStyle = colors.ticks;
+  ctxaF.textBaseline = "middle";
   ctxaF.font = "26pt Arial";
   ctxaF.textAlign = "center";
   let currentTicks = ticks.altFeetTicks.filter((element) => {
@@ -124,6 +133,7 @@ function drawAltFeetTicks() {
 
 function drawAltFeetValue() {
   ctxaF.font = "30pt Arial";
+  ctxaF.textBaseline = "middle";
   ctxaF.textAlign = "center";
   ctxaF.fillText(
     Math.floor(currentData.altFeet / 10) * 10,

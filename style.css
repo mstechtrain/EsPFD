@@ -9,10 +9,44 @@ canvas {
   height: 100%;
 }
 
-.tape{
-  background-color: rgba(0, 0, 0, .5)
+.tape {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #eadiCanvas {
   background-color: aqua;
+}
+
+.button-wrapper {
+  position: absolute;
+  bottom: 5%;
+  left: 20%;
+  display: flex;
+
+  height: 215px;
+  width: 60%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.e175button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  font-size: 1.4rem;
+  border-radius: 10px;
+  border-style: ridge;
+  border-width: medium;
+  border-color: yellow;
+  color: white;
+  background-color: rgb(128, 128, 128);
+  height: 190px;
+  width: 190px;
+  word-wrap: normal;
+}
+
+.e175button:active {
+  border-width: thick;
 }

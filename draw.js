@@ -10,6 +10,7 @@ let colors = {
 let currentData = getTestData();
 
 // function drawEADI() {
+// ctxeadi.clearRect(0, 0, ctxeadi.canvas.width, ctxeadi.canvas.height);
 //   let grd = ctx.createRadialGradient(
 //     canvas.width * 0.5,
 //     canvas.height * 0.5,
@@ -54,17 +55,17 @@ let currentData = getTestData();
 // //   ctx.fill();
 // }
 
-function drawTapeBG() {
-  ctxaS.fillStyle = colors.tapeBG;
-  ctxaS.fillRect(...cC.aSaFbg);
-  ctxaF.fillStyle = colors.tapeBG;
-  ctxaF.fillRect(...cC.aSaFbg);
-}
+// function drawTapeBG() {
+//   ctxaS.fillStyle = colors.tapeBG;
+//   ctxaS.fillRect(...cC.aSaFbg);
+//   ctxaF.fillStyle = colors.tapeBG;
+//   ctxaF.fillRect(...cC.aSaFbg);
+// }
 
 function drawAirSpeedTicks() {
-  ctx.fillStyle = colors.ticks;
-  ctx.font = "26pt Arial";
-  ctx.textAlign = "center";
+  ctxaS.fillStyle = colors.ticks;
+  ctxaS.font = "26pt Arial";
+  ctxaS.textAlign = "center";
   let currentTicks = ticks.airSpeedTicks.filter((element) => {
     return (
       element <= currentData.airSpeed + 25 &&
@@ -72,33 +73,34 @@ function drawAirSpeedTicks() {
     );
   });
   currentTicks.forEach((value) => {
-    ctx.fillText(
+    ctxaS.fillText(
       value,
-      cC.aSbg[2] * 0.5,
-      cC.aSbg[3] * 0.5 - (value - currentData.airSpeed) * 15
+      cC.aSaFbg[2] * 0.5,
+      cC.aSaFbg[3] * 0.5 - (value - currentData.airSpeed) * 15
     );
   });
 }
 
 function drawAirSpeedValue() {
-  ctx.font = "30pt Arial";
-  ctx.textAlign = "center";
-  ctx.fillText(
+  ctxaS.font = "30pt Arial";
+  ctxaS.textAlign = "center";
+  ctxaS.fillText(
     Math.round(currentData.airSpeed),
-    cC.aSbg[2] * 0.5,
-    cC.aSbg[3] * 0.5
+    cC.aSaFbg[2] * 0.5,
+    cC.aSaFbg[3] * 0.5
   );
 }
 
 function drawAirSpeed() {
-  // drawAirSpeedTicks();
-  // drawAirSpeedValue();
+  ctxaS.clearRect(0, 0, ctxaS.canvas.width, ctxaS.canvas.height);
+  drawAirSpeedTicks();
+  drawAirSpeedValue();
 }
 
 function drawAltFeetTicks() {
-  ctx.fillStyle = colors.ticks;
-  ctx.font = "26pt Arial";
-  ctx.textAlign = "center";
+  ctxaF.fillStyle = colors.ticks;
+  ctxaF.font = "26pt Arial";
+  ctxaF.textAlign = "center";
   let currentTicks = ticks.altFeetTicks.filter((element) => {
     return (
       element <= currentData.altFeet + 2000 &&
@@ -107,36 +109,34 @@ function drawAltFeetTicks() {
   });
 
   currentTicks.forEach((value) => {
-    ctx.fillText(
+    ctxaF.fillText(
       value,
-      cC.aFbg[0] + cC.aFbg[2] * 0.25,
-      cC.aFbg[3] * 0.5 - (value - currentData.altFeet) * 0.25
+      cC.aSaFbg[0] + cC.aSaFbg[2] * 0.25,
+      cC.aSaFbg[3] * 0.5 - (value - currentData.altFeet) * 0.25
     );
   });
 }
 
 function drawAltFeetValue() {
-  ctx.font = "30pt Arial";
-  ctx.textAlign = "center";
-  ctx.fillText(
+  ctxaF.font = "30pt Arial";
+  ctxaF.textAlign = "center";
+  ctxaF.fillText(
     Math.floor(currentData.altFeet / 10) * 10,
-    cC.aFbg[0] + cC.aFbg[2] * 0.25,
-    cC.aFbg[3] * 0.5
+    cC.aSaFbg[0] + cC.aSaFbg[2] * 0.25,
+    cC.aSaFbg[3] * 0.5
   );
 }
 
 function drawAltFeet() {
-  // drawAltFeetTicks();
-  // drawAltFeetValue();
+  ctxaF.clearRect(0, 0, ctxaF.canvas.width, ctxaF.canvas.height);
+  drawAltFeetTicks();
+  drawAltFeetValue();
 }
 
 function drawAll() {
   currentData = getTestData();
-  ctxaS.clearRect(0, 0, ctxaS.canvas.width, ctxaS.canvas.height);
-  ctxeadi.clearRect(0, 0, ctxeadi.canvas.width, ctxeadi.canvas.height);
-  ctxaF.clearRect(0, 0, ctxaF.canvas.width, ctxaF.canvas.height);
+
   // drawEADI();
-  drawTapeBG();
   drawAirSpeed();
   drawAltFeet();
 

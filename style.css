@@ -9,4 +9,10 @@ canvas {
   height: 100%;
 }
 
+.tape{
+  background-color: rgba(0, 0, 0, .5)
+}
 
+#eadiCanvas {
+  background-color: aqua;
+}

@@ -4,11 +4,11 @@ import { drawAll } from "./draw.js";
 
 window.addEventListener("devicemotion", (event) => {
   let combinedText =
-    Math.round(event.acceleration.x) +
+    Math.round(event.accelerationIncludingGravity.x) +
     " x     " +
-    Math.round(event.acceleration.y) +
+    Math.round(event.accelerationIncludingGravity.y) +
     " y     " +
-    Math.round(event.acceleration.z) +
+    Math.round(event.accelerationIncludingGravity.z) +
     "  z";
   document.getElementById("label").innerText = combinedText;
   console.log(`${event.acceleration.x} m/s2`);

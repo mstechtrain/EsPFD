@@ -7,53 +7,58 @@ let colors = {
   ticks: "rgb(255,255,255)",
 };
 
+let rot = 0;
+
 let currentData = getTestData();
 
-// function drawEADI() {
-// ctxeadi.clearRect(0, 0, ctxeadi.canvas.width, ctxeadi.canvas.height);
-//   let grd = ctx.createRadialGradient(
-//     canvas.width * 0.5,
-//     canvas.height * 0.5,
-//     canvas.width * 0.125,
-//     canvas.width * 0.5,
-//     canvas.height * 0.5,
-//     canvas.width * 0.75
-//   );
+// setInterval(() => {
+//   rot += 0.001;
+// }, 1000);
 
-//   grd.addColorStop(0, "blue");
-//   grd.addColorStop(1, "cyan");
+function drawEADI() {
+  ctxeadi.clearRect(0, 0, ctxeadi.canvas.width, ctxeadi.canvas.height);
+  ctxeadi.scale(1, 1);
 
-//   ctx.fillStyle = grd;
-//   ctx.arc(
-//     canvas.width * 0.5,
-//     canvas.height * 0.5,
-//     canvas.width * 0.7,
-//     1 * Math.PI,
-//     2 * Math.PI
-//   );
-// //   ctx.fill();
+  ctxeadi.translate(ctxeadi.canvas.width * 0.5, ctxeadi.canvas.height * 0.5);
+  ctxeadi.rotate((rot * Math.PI) / 180);
+  ctxeadi.translate(ctxeadi.canvas.width * -0.5, ctxeadi.canvas.height * -0.5);
 
-//   let grd2 = ctx.createRadialGradient(
-//     canvas.width * 0.5,
-//     canvas.height * 0.5,
-//     canvas.width * 0.125,
-//     canvas.width * 0.5,
-//     canvas.height * 0.5,
-//     canvas.width * 0.75
-//   );
+  let grd1 = ctxeadi.createLinearGradient(
+    ctxeadi.canvas.width * 0.5,
+    0,
+    ctxeadi.canvas.width * 0.5,
+    ctxeadi.canvas.height * 0.5
+  );
 
-//   grd2.addColorStop(0, "brown");
-//   grd2.addColorStop(1, "black");
-// //   ctx.fillStyle = grd2;
-// //   ctx.arc(
-// //     canvas.width * 0.5,
-// //     canvas.height * 0.5,
-// //     canvas.width * 0.17,
-// //     0.5 * Math.PI,
-// //     1 * Math.PI
-// //   );
-// //   ctx.fill();
-// }
+  grd1.addColorStop(0, "lightblue");
+  grd1.addColorStop(1, "blue");
+
+  ctxeadi.fillStyle = grd1;
+  ctxeadi.fillRect(
+    0 - ctxeadi.canvas.width * 0.2,
+    0 - ctxeadi.canvas.height * 0.2,
+    ctxeadi.canvas.width * 1.4,
+    ctxeadi.canvas.height * 0.7
+  );
+
+  let grd2 = ctxeadi.createLinearGradient(
+    ctxeadi.canvas.width * 0.5,
+    ctxeadi.canvas.height * 0.5,
+    ctxeadi.canvas.width * 0.5,
+    ctxeadi.canvas.height
+  );
+
+  grd2.addColorStop(0, "orange");
+  grd2.addColorStop(1, "brown");
+
+  ctxeadi.fillStyle = grd2;
+  ctxeadi.fillRect(
+    0 - ctxeadi.canvas.width * 0.2,
+    ctxeadi.canvas.height * 0.5,
+    ctxeadi.canvas.width * 1.4,
+    ctxeadi.canvas.height * 0.7
+  );
+}
 
 // function drawTapeBG() {
 //   ctxaS.fillStyle = colors.tapeBG;
@@ -136,7 +141,7 @@ function drawAltFeet() {
 function drawAll() {
   currentData = getTestData();
 
-  // drawEADI();
+  drawEADI();
   drawAirSpeed();
   drawAltFeet();
 

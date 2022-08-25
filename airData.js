@@ -10,6 +10,19 @@ let espData = {
 let aSchange = -0.1;
 let aFchange = -200;
 
+function getEspData() {
+  console.log("ADS Button pressed");
+  fetch("https://www.mstechtrain.github.io/EsPFDjs/")
+    .then((response) => {
+      if (!response.ok) {
+        console.log(response.status);
+      } else {
+        return response.text();
+      }
+    })
+    .then((data) => console.log(data));
+}
+
 setInterval(() => {
   if (espData.airSpeed > 30 && espData.airSpeed < 250) {
     espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
@@ -40,4 +53,4 @@ function getTestData() {
   return espData;
 }
 
-export { getTestData, espData };
+export { getTestData, espData, getEspData };

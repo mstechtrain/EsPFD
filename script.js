@@ -1,6 +1,15 @@
 import { cC, ctxaS, ctxaF, ctxeadi } from "./canv.js";
 import { ticks } from "./ticks.js";
 import { drawAll } from "./draw.js";
+import { getEspData } from "./airData.js";
+
+let btbutton = document.getElementById("eadiLockSwitch");
+
+function tryBluetooth() {
+  navigator.bluetooth.requestDevice();
+}
+
+btbutton.onclick(tryBluetooth());
 
 // window.addEventListener("devicemotion", (event) => {
 //   let combinedText =
@@ -14,4 +23,5 @@ import { drawAll } from "./draw.js";
 //   console.log(`${event.acceleration.x} m/s2`);
 // });
 
+window.getEspData = getEspData;
 window.requestAnimationFrame(drawAll);

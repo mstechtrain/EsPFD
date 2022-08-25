@@ -7,6 +7,9 @@ let btbutton = document.getElementById("eadiLockSwitch");
 btbutton.addEventListener("pointerup", () => {
   navigator.bluetooth.requestDevice({ acceptAllDevices: true });
 });
+btbutton.addEventListener("touchend", () => {
+    navigator.bluetooth.requestDevice({ acceptAllDevices: true });
+  });
 
 // function tryBluetooth() {
 //   navigator.bluetooth.requestDevice();

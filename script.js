@@ -4,12 +4,13 @@ import { drawAll } from "./draw.js";
 import { getEspData } from "./airData.js";
 
 let btbutton = document.getElementById("eadiLockSwitch");
+btbutton.addEventListener("pointerup", () => {
+  navigator.bluetooth.requestDevice({ acceptAllDevices: true });
+});
 
-function tryBluetooth() {
-  navigator.bluetooth.requestDevice();
-}
-
-btbutton.onclick(tryBluetooth());
+// function tryBluetooth() {
+//   navigator.bluetooth.requestDevice();
+// }
 
 // window.addEventListener("devicemotion", (event) => {
 //   let combinedText =

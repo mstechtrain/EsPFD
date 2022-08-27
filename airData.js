@@ -10,7 +10,7 @@ let espData = {
 let aSchange = -0.1;
 let aFchange = -200;
 
-function getEspData() {
+function getEspDataButton() {
   console.log("ADS Button pressed");
   fetch("https://www.mstechtrain.github.io/EsPFDjs/")
     .then((response) => {
@@ -21,6 +21,24 @@ function getEspData() {
       }
     })
     .then((data) => console.log(data));
+}
+
+function getEspData() {
+  alert(JSON.stringify(espData));
+  fetch("http://192.168.1.1/data")
+    .then((res) => {
+      if (!res.ok) {
+        console.log(res.status);
+        return;
+      } else {
+        return res.text();
+      }
+    })
+    .then((data) => {
+      espData = data;
+      console.log(espData);
+      setTimeout(getEspData(), 20);
+    });
 }
 
 setInterval(() => {

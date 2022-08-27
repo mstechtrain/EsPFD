@@ -6,13 +6,16 @@ import { getEspData } from "./airData.js";
 var noSleep = new NoSleep();
 
 let btbutton = document.getElementById("eadiLockSwitch");
-btbutton.addEventListener("pointerup", () => {
-  navigator.bluetooth.requestDevice({ acceptAllDevices: true });
-});
+// btbutton.addEventListener("pointerup", () => {
+//   navigator.bluetooth.requestDevice({ acceptAllDevices: true });
+// });
 
-btbutton.addEventListener("touchend", () => {
-  navigator.bluetooth.requestDevice({ acceptAllDevices: true });
-});
+// btbutton.addEventListener("touchend", () => {
+//   navigator.bluetooth.requestDevice({ acceptAllDevices: true });
+// });
+
+btbutton.addEventListener("touchend", getEspData());
+btbutton.addEventListener("pointerup", getEspData());
 
 document.addEventListener(
   "click",

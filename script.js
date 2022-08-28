@@ -1,7 +1,7 @@
 import { cC, ctxaS, ctxaF, ctxeadi } from "./canv.js";
 import { ticks } from "./ticks.js";
 import { drawAll } from "./draw.js";
-import { adcVoltageList, getADSData, enableADC } from "./airData.js";
+import { getADSData, enableADC, outputforrender, start } from "./airData.js";
 
 var noSleep = new NoSleep();
 
@@ -16,7 +16,7 @@ let btbutton = document.getElementById("eadiLockSwitch");
 
 // btbutton.addEventListener("touchend", getEspData());
 // btbutton.addEventListener("pointerup", getEspData());
-// 
+//
 document.addEventListener(
   "click",
   function enableNoSleep() {
@@ -43,7 +43,17 @@ document.addEventListener(
 // });
 
 // setInterval(getEspData(),1000)
-window.adcVoltageList = adcVoltageList;
-window.enableADC = enableADC;
-window.getAdsData = getADSData;
-window.requestAnimationFrame(drawAll);
+// window.adcVoltageList = adcVoltageList;
+// window.getAdsData = getADSData;
+
+window.addEventListener("load", (event) => {
+  enableADC();
+});
+
+// window.enableADC = enableADC;
+
+window.outputforrender = outputforrender();
+setTimeout(() => {
+  window.requestAnimationFrame(drawAll);
+  start();
+}, 1000);

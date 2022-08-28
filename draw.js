@@ -1,6 +1,7 @@
 import { cC, ctxaS, ctxaF, ctxeadi } from "./canv.js";
 import { ticks } from "./ticks.js";
-import { getADSData } from "./airData.js";
+import { outputforrender } from "./airData.js";
+// import { getADSData, outputforrender } from "./airData.js";
 
 let colors = {
   tapeBG: "rgba(0,0,0,.5)",
@@ -9,7 +10,11 @@ let colors = {
 
 let rot = 0;
 
-let currentData = getADSData();
+let currentData = {
+  altFeet: 0,
+  airSpeed: 0,
+  vsi: 0,
+};
 
 // setInterval(() => {
 //   rot += 0.001;
@@ -148,8 +153,8 @@ function drawAltFeet() {
   drawAltFeetValue();
 }
 
-function drawAll() {
-  currentData = getADSData();
+async function drawAll() {
+  currentData = await outputforrender(0);
 
   drawEADI();
   drawAirSpeed();

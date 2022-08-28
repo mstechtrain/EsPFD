@@ -1,7 +1,7 @@
 import { cC, ctxaS, ctxaF, ctxeadi } from "./canv.js";
 import { ticks } from "./ticks.js";
 import { drawAll } from "./draw.js";
-import { getEspData } from "./airData.js";
+import { adcVoltageList, getADSData, enableADC } from "./airData.js";
 
 var noSleep = new NoSleep();
 
@@ -14,9 +14,9 @@ let btbutton = document.getElementById("eadiLockSwitch");
 //   navigator.bluetooth.requestDevice({ acceptAllDevices: true });
 // });
 
-btbutton.addEventListener("touchend", getEspData());
-btbutton.addEventListener("pointerup", getEspData());
-
+// btbutton.addEventListener("touchend", getEspData());
+// btbutton.addEventListener("pointerup", getEspData());
+// 
 document.addEventListener(
   "click",
   function enableNoSleep() {
@@ -42,5 +42,8 @@ document.addEventListener(
 //   console.log(`${event.acceleration.x} m/s2`);
 // });
 
-window.getEspData = getEspData;
+// setInterval(getEspData(),1000)
+window.adcVoltageList = adcVoltageList;
+window.enableADC = enableADC;
+window.getAdsData = getADSData;
 window.requestAnimationFrame(drawAll);

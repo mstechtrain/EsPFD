@@ -57,10 +57,12 @@ function getEspDataButton() {
 }
 
 function getEspData() {
-  fetch("http://192.168.1.36/data")
+  fetch("http://192.168.1.36/data", {
+    headers: { "Content-Type": "application/json" },
+  })
     .then((res) => {
       if (!res.ok) {
-        console.log(res.status);
+        alert(res.status);
         return;
       } else {
         return res.json();
@@ -73,6 +75,9 @@ function getEspData() {
         getEspData();
       }, 10);
       // setTimeout(getEspData(), 5000);
+    })
+    .catch((error) => {
+      console.log(error);
     });
 }
 
@@ -169,23 +174,24 @@ function formatAirData() {
 
 function outputforrender(adcrev) {
   if (adcrev == 0) {
-    let tempAirspeed = (airData.adc1airSpeed + airData.adc2airSpeed) / 2
+    let tempAirspeed = (airData.adc1airSpeed + airData.adc2airSpeed) / 2;
     let output = {
       altFeet: (airData.adc1altFeet + airData.adc2altFeet) / 2,
-      airSpeed: Math.max((airData.adc1airSpeed + airData.adc2airSpeed) / 2,30),
-      vsi: (airData.adc1vsi + airData.adc2vsi) / 2,}
-      return output;
+      airSpeed: Math.max((airData.adc1airSpeed + airData.adc2airSpeed) / 2, 30),
+      vsi: (airData.adc1vsi + airData.adc2vsi) / 2,
+    };
+    return output;
   } else if (adcrev == 1) {
     let output = {
       altFeet: airData.adc1altFeet,
-      airSpeed: Math.max(airData.adc1airSpeed,30),
+      airSpeed: Math.max(airData.adc1airSpeed, 30),
       vsi: airData.adc1vsi,
     };
     return output;
-  } else  {
+  } else {
     let output = {
       altFeet: airData.adc2altFeet,
-      airSpeed: Math.max(airData.adc2airSpeed,30),
+      airSpeed: Math.max(airData.adc2airSpeed, 30),
       vsi: airData.adc2vsi,
     };
     return output;
@@ -196,7 +202,9 @@ function start() {
     calculateVSI();
     formatAirData();
     // console.log(airData.adc2altFeet - vsiList.adc2vsiLastAlt);
-    document.getElementById("label").innerText = JSON.stringify(outputforrender(0));
+    document.getElementById("label").innerText = JSON.stringify(
+      outputforrender(0)
+    );
   }, 200);
 }
 
@@ -233,4 +241,4 @@ function enableADC() {
 function getADSData() {
   return adcPress;
 }
-export { getADSData, enableADC, outputforrender,start };
+export { getADSData, enableADC, outputforrender, start };

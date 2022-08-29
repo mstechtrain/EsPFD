@@ -17,6 +17,11 @@
       format("opentype"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+#debugdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 html,
 body {
   font-family: "Share";
@@ -99,7 +104,7 @@ canvas {
 }
 
 #eadiLockLabel {
-    height: 30%;
+  height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,4 +115,32 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#adcstatus {
+  color: white;
+  background-color: red;
+}
+
+.debugbody {
+  background-color: black;
+  color: white;
+}
+
+.debugdiv {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+input{
+  text-align: center;
+  color:white;
+  background-color: black;
 }

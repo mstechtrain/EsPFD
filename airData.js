@@ -6,6 +6,29 @@ let adcVoltageList = {
   adc2s2: [],
 };
 
+let calVals = {
+  adc1s1max,
+  adc1s1min,
+  adc1s2max,
+  adc1s2min,
+  adc2s1max,
+  adc2s1min,
+  adc2s2max,
+  adc2s2min,
+  calMax,
+  calMin,
+  length,
+};
+
+function numCalVals() {
+  for (const key in calVals) {
+    calVals[key] = parseFloat(localStorage[key]);
+  }
+  console.log(JSON.stringify(calVals));
+}
+
+numCalVals();
+
 let adcVavg = {};
 
 let adcPress = {
@@ -59,6 +82,16 @@ function getEspData() {
     });
 }
 
+function debug() {
+  let debugRaw = {};
+
+  // document.getElementById("airdatadiv").innerText = JSON.stringify(airData);
+  // document.getElementById("adcvoltdiv").innerText =
+  //   JSON.stringify(adcVoltageList);
+  document.getElementById("adcvoltavgdiv").innerText = JSON.stringify(adcPress);
+  // console.log(calVals);
+}
+
 function updateData(dataIn) {
   if (adcVoltageList["adc1s1"].length < 50) {
     for (const key in dataIn) {
@@ -78,6 +111,7 @@ function updateData(dataIn) {
     let eachAvgToV = (eachAvg * 6.144) / 32767;
     adcVavg[key] = Math.round(eachAvgToV * 1e4) / 1e4;
   }
+
   calculatePress();
   calculateAlt();
   calculateAirSpeed();
@@ -85,11 +119,31 @@ function updateData(dataIn) {
 }
 
 function calculatePress() {
-  for (const key in adcPress) {
-    adcPress[key] = ((adcVavg[key] / adcVavg.vinavg + 0.095) / 0.009) * 10;
+  if (calVals.length >= 10) {
+    for (const key in adcPress) {
+      let avgVal = ((adcVavg[key] / adcVavg.vinavg + 0.095) / 0.009) * 10;
+      adcPress[key] =
+        Math.round(
+          (((avgVal - calVals[key + "min"]) *
+            (calVals.calMax - calVals.calMin)) /
+            (calVals[key + "max"] - calVals[key + "min"]) +
+            calVals.calMin) *
+            1e3
+        ) / 1e3;
+    }
+    // console.log("ran cal");
+  } else {
+    for (const key in adcPress) {
+      adcPress[key] =
+        Math.round(
+          ((adcVavg[key] / adcVavg.vinavg + 0.095) / 0.009) * 10 * 1e3
+        ) / 1e3;
+    }
+    // console.log(calVals.length);
   }
   // console.log(adcPress);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //   ptCal = (((ptPress - ptMin) * (calMax - calMin)) / (ptMax - ptMin)) + calMin;
 //   psCal = (((psPress - psMin) * (calMax - calMin)) / (psMax - psMin)) + calMin;
@@ -97,16 +151,18 @@ function calculatePress() {
 
 function calculateAlt() {
   let temp = 15;
-  airData.adc1altFeet =
+  airData.adc1altFeet = Math.round(
     (((Math.pow(1013.25 / adcPress.adc1s1, 1 / 5.257) - 1.0) *
       (temp + 273.15)) /
       0.0065) *
-    3.28084;
-  airData.adc2altFeet =
+      3.28084
+  );
+  airData.adc2altFeet = Math.round(
     (((Math.pow(1013.25 / adcPress.adc2s1, 1 / 5.257) - 1.0) *
       (temp + 273.15)) /
       0.0065) *
-    3.28084;
+      3.28084
+  );
 }
 
 function calculateAirSpeed() {
@@ -136,9 +192,14 @@ function calculateVSI() {
   vsiList.adc2vsi.push(airData.adc2altFeet - vsiList.adc2vsiLastAlt);
 
   airData.adc1vsi =
-    (vsiList.adc1vsi.reduce((a, b) => a + b) / vsiList.adc1vsi.length) * 30;
+    Math.round(
+      vsiList.adc1vsi.reduce((a, b) => a + b) / vsiList.adc1vsi.length
+    ) * 30;
+
   airData.adc2vsi =
-    (vsiList.adc2vsi.reduce((a, b) => a + b) / vsiList.adc2vsi.length) * 30;
+    Math.round(
+      vsiList.adc2vsi.reduce((a, b) => a + b) / vsiList.adc2vsi.length
+    ) * 30;
 
   vsiList.adc1vsiLastAlt = airData.adc1altFeet;
   vsiList.adc2vsiLastAlt = airData.adc2altFeet;
@@ -183,12 +244,11 @@ function start() {
     // document.getElementById("label").innerText = JSON.stringify(
     //   outputforrender(0)
     // );
-  }, 200);
+  }, 300);
 }
 
 function enableADC() {
   getEspData();
 }
 
-
-export { enableADC, outputforrender, start };
+export { enableADC, outputforrender, start, debug };

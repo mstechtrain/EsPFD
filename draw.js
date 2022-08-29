@@ -244,16 +244,51 @@ function drawAltFeet() {
   drawAltFeetValue();
 }
 
+function drawVsiVal() {
+  ctxaF.fillStyle = "black";
+  ctxaF.strokeStyle = "white";
+  ctxaF.strokeRect(
+    cC.vsibg[0] * 1.05,
+    cC.vsibg[3] * 0.47,
+    cC.vsibg[2],
+    cC.vsibg[3] * 0.06
+  );
+  ctxaF.fillRect(
+    cC.vsibg[0] * 1.05,
+    cC.vsibg[3] * 0.47,
+    cC.vsibg[2],
+    cC.vsibg[3] * 0.06
+  );
+
+  ctxaF.font = "24pt Share";
+  ctxaF.textBaseline = "middle";
+  ctxaF.textAlign = "center";
+  ctxaF.fillStyle = "lime";
+
+  ctxaF.fillText(
+    currentData.vsi,
+    // -6000,
+    cC.vsibg[0] + cC.vsibg[2] * 0.2,
+    cC.vsibg[3] * 0.5
+  );
+}
+
+function drawVSI() {
+  // drawVsiTicks();
+  // drawVsiInd();
+  drawVsiVal();
+}
+
 function changeADS() {
   if (ads == 0) {
     ads++;
-    document.getElementById("adsRevInd").innerText="ADS 1";
-  } else if (ads == 1){
+    document.getElementById("adsRevInd").innerText = "ADS 1";
+  } else if (ads == 1) {
     ads++;
-    document.getElementById("adsRevInd").innerText="ADS 2";
+    document.getElementById("adsRevInd").innerText = "ADS 2";
   } else {
     ads = 0;
-    document.getElementById("adsRevInd").innerText="BOTH";
+    document.getElementById("adsRevInd").innerText = "BOTH";
   }
 }
 
@@ -263,6 +298,9 @@ async function drawAll() {
   drawEADI();
   drawAirSpeed();
   drawAltFeet();
+  drawVSI();
+
+  document.getElementById("label").innerText = JSON.stringify(currentData);
 
   window.requestAnimationFrame(drawAll);
 }

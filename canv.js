@@ -11,6 +11,12 @@ let cC = {
   aFbg: [0, 0, afCanvas.width, afCanvas.height],
   aFcv: afCanvas.height * 0.5,
   aFch: afCanvas.width * 0.5,
+  vsibg: [
+    afCanvas.width * 0.63,
+    0,
+    afCanvas.width,
+    afCanvas.height,
+  ],
 };
 
 let ctxaS = asCanvas.getContext("2d");
@@ -25,8 +31,14 @@ function updatecC() {
     aFbg: [0, 0, afCanvas.width, afCanvas.height],
     aFcv: afCanvas.height * 0.5,
     aFch: afCanvas.width * 0.5,
+    vsibg: [
+      afCanvas.width * 0.63,
+      0,
+      afCanvas.width,
+      afCanvas.height,
+    ],
   };
-  console.log(cC);
+  // console.log(cC);
 }
 
 const resize = () => {

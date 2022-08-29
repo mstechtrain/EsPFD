@@ -7,9 +7,12 @@
     <title>EsPFD</title>
   </head>
   <body>
-
     <script src="./NoSleep.js"></script>
-    <!-- <h3 id="label">HI!</h3> -->
+
+    <div id="debugdiv">
+      <h3 id="label">HI!</h3>
+      <button action="" id="request">REQ</button>
+    </div>
     <canvas
       id="asCanvas"
       class="tape"
@@ -43,8 +46,14 @@
       "
     ></canvas>
     <div class="button-wrapper">
-      <div id="adsRevSwitch" class="e175button" ><div id="adsRevLabel"><strong>ADS REV</strong></div><div id="adsRevInd">BOTH</div></div>
-      <div id="eadiLockSwitch" class="e175button" ><div id="eadiLockLabel"><strong>EADI LOCK</strong></div><div id="eadiLockSwitchInd"></div></div>
+      <div id="adsRevSwitch" class="e175button">
+        <div id="adsRevLabel"><strong>ADS REV</strong></div>
+        <div id="adsRevInd">BOTH</div>
+      </div>
+      <div id="eadiLockSwitch" class="e175button">
+        <div id="eadiLockLabel"><strong>EADI LOCK</strong></div>
+        <div id="eadiLockSwitchInd"></div>
+      </div>
     </div>
   </body>
   <script type="module" src="script.js"></script>

@@ -1,5 +1,5 @@
 import { drawAll, changeADS } from "./draw.js";
-import { enableADC, start } from "./airData.js";
+import { enableADC, start, debug } from "./airData.js";
 
 var noSleep = new NoSleep();
 
@@ -51,9 +51,9 @@ function touch2Mouse(e) {
 let adsrevbutton = document.getElementById("adsRevSwitch");
 let eadilockbutton = document.getElementById("eadiLockSwitch");
 
-eadilockbutton.addEventListener("pointerup", () => {
-  eadilock();
-});
+// eadilockbutton.addEventListener("pointerup", () => {
+//   eadilock();
+// });
 
 adsrevbutton.addEventListener("pointerup", () => {
   adsrev();
@@ -85,12 +85,16 @@ window.addEventListener("load", (event) => {
 });
 
 function eadilock() {
-  alert("onclick works");
+  DeviceMotionEvent.requestPermission().then((res) => {
+    document.getElementById("label").innerText = res;
+  });
 }
 
 function adsrev() {
   changeADS();
 }
+
+window.debug = debug;
 
 setTimeout(() => {
   start();

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debug</title>
+  </head>
+  <body class="debugbody">
+    <header>
+      <h1>EsPFD DEBUG PAGE</h1>
+      <button id="startButton" onclick="startADC()">START ADC</button>
+      <div id="adcstatus">STOPPED</div>
+    </header>
+
+    <div class="calinputs" style="display: flex; align-content:center; justify-content:center">
+        <table class="caltable">
+            <tr>
+                <th>Values</th>
+                <th>Min</th>
+                <th>Max</th>
+            </tr>
+            <tr>
+                <td>Cal Source</td>
+                <td><input type="number" name="calMin" id="calMin"></td>
+                <td><input type="number" name="calMax" id="calMax"></td>
+            </tr>
+            <tr>
+                <td>ADC1 Sens 1</td>
+                <td><input type="number" name="ADS1S1Min" id="adc1s1min"></td>
+                <td><input type="number" name="ADS1S1Max" id="adc1s1max"></td>
+            </tr>
+            <tr>
+                <td>ADC1 Sens 2</td>
+                <td><input type="number" name="ADS1S2Min" id="adc1s2min"></td>
+                <td><input type="number" name="ADS1S2Max" id="adc1s2max"></td>
+            </tr>
+            <tr>
+                <td>ADC2 Sens 1</td>
+                <td><input type="number" name="ADS2S1Min" id="adc2s1min"></td>
+                <td><input type="number" name="ADS2S1Max" id="adc2s1max"></td>
+            </tr>
+            <tr>
+                <td>ADC2 Sens 2</td>
+                <td><input type="number" name="ADS2S2Min" id="adc2s2min"></td>
+                <td><input type="number" name="ADS2S2Max" id="adc2s2max"></td>
+            </tr>
+        </table>
+     
+    </div>
+
+    <div id="airdatadiv" class="debugdiv"></div>
+    <div id="adcvoltdiv" class="debugdiv"></div>
+    <div id="adcvoltavgdiv" class="debugdiv"></div>
+
+    <script type="module" src="debug.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </body>
+</html>

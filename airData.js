@@ -1,12 +1,3 @@
-let espData = {
-  airSpeed: 74,
-  altFeet: 2000,
-  Pt1: 0,
-  Pt2: 0,
-  Ps1: 0,
-  Ps2: 0,
-};
-
 let adcVoltageList = {
   vinavg: [],
   adc1s1: [],
@@ -42,19 +33,6 @@ let vsiList = {
 
 let aSchange = -0.1;
 let aFchange = -200;
-
-function getEspDataButton() {
-  console.log("ADS Button pressed");
-  fetch("https://www.mstechtrain.github.io/EsPFDjs/")
-    .then((response) => {
-      if (!response.ok) {
-        console.log(response.status);
-      } else {
-        return response.text();
-      }
-    })
-    .then((data) => console.log(data));
-}
 
 function getEspData() {
   fetch("http://192.168.1.36/data", {
@@ -174,7 +152,7 @@ function formatAirData() {
 
 function outputforrender(adcrev) {
   if (adcrev == 0) {
-    let tempAirspeed = (airData.adc1airSpeed + airData.adc2airSpeed) / 2;
+    // let tempAirspeed = (airData.adc1airSpeed + airData.adc2airSpeed) / 2;
     let output = {
       altFeet: (airData.adc1altFeet + airData.adc2altFeet) / 2,
       airSpeed: Math.max((airData.adc1airSpeed + airData.adc2airSpeed) / 2, 30),
@@ -202,43 +180,15 @@ function start() {
     calculateVSI();
     formatAirData();
     // console.log(airData.adc2altFeet - vsiList.adc2vsiLastAlt);
-    document.getElementById("label").innerText = JSON.stringify(
-      outputforrender(0)
-    );
+    // document.getElementById("label").innerText = JSON.stringify(
+    //   outputforrender(0)
+    // );
   }, 200);
 }
-
-// setInterval(() => {
-//   if (espData.airSpeed > 30 && espData.airSpeed < 250) {
-//     espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
-//   } else if (espData.airSpeed <= 30) {
-//     aSchange = 0.1;
-//     espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
-//   } else if ((espData.airSpeed = 250)) {
-//     aSchange = -0.1;
-//     espData.airSpeed = +(espData.airSpeed + aSchange).toFixed(2);
-//   }
-
-//   if (espData.altFeet > -1000 && espData.altFeet < 30000)
-//     espData.altFeet += aFchange;
-//   else if (espData.altFeet == -1000) {
-//     aFchange = 2;
-//     espData.altFeet += aFchange;
-//   } else if (espData.altFeet == 30000) {
-//     aFchange = -2;
-//     espData.altFeet += aFchange;
-//   }
-// }, 20);
-
-// for (const item in espData) {
-//   espData[item] = Math.random() * 10;
-// }
 
 function enableADC() {
   getEspData();
 }
 
-function getADSData() {
-  return adcPress;
-}
-export { getADSData, enableADC, outputforrender, start };
+
+export { enableADC, outputforrender, start };

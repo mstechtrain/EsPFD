@@ -4,19 +4,33 @@ let asCanvas = document.getElementById("asCanvas");
 let eadiCanvas = document.getElementById("eadiCanvas");
 let afCanvas = document.getElementById("afCanvas");
 
-let cC = { aSbg: [], aFbg: [] };
+let cC = {
+  aSbg: [0, 0, asCanvas.width, asCanvas.height],
+  aScv: asCanvas.height * 0.5,
+  aSch: asCanvas.width * 0.5,
+  aFbg: [0, 0, afCanvas.width, afCanvas.height],
+  aFcv: afCanvas.height * 0.5,
+  aFch: afCanvas.width * 0.5,
+};
+
 let ctxaS = asCanvas.getContext("2d");
 let ctxeadi = eadiCanvas.getContext("2d");
 let ctxaF = afCanvas.getContext("2d");
 
 function updatecC() {
   cC = {
-    aSaFbg: [0, 0, asCanvas.width, asCanvas.height],
+    aSbg: [0, 0, asCanvas.width, asCanvas.height],
+    aScv: asCanvas.height * 0.5,
+    aSch: asCanvas.width * 0.5,
+    aFbg: [0, 0, afCanvas.width, afCanvas.height],
+    aFcv: afCanvas.height * 0.5,
+    aFch: afCanvas.width * 0.5,
   };
+  console.log(cC);
 }
 
 const resize = () => {
-  ctxaS.canvas.width = window.innerWidth * 0.2;
+  ctxaS.canvas.width = window.innerWidth * 0.15;
   ctxaS.canvas.height = window.innerHeight;
   ctxeadi.canvas.width = window.innerWidth;
   ctxeadi.canvas.height = window.innerHeight;

@@ -1,22 +1,64 @@
-import { cC, ctxaS, ctxaF, ctxeadi } from "./canv.js";
-import { ticks } from "./ticks.js";
-import { drawAll } from "./draw.js";
-import { getADSData, enableADC, outputforrender, start } from "./airData.js";
+import { drawAll, changeADS } from "./draw.js";
+import { enableADC, start } from "./airData.js";
 
 var noSleep = new NoSleep();
 
-let btbutton = document.getElementById("eadiLockSwitch");
-// btbutton.addEventListener("pointerup", () => {
-//   navigator.bluetooth.requestDevice({ acceptAllDevices: true });
-// });
+document.addEventListener("touchstart", touch2Mouse, true);
+document.addEventListener("touchmove", touch2Mouse, true);
+document.addEventListener("touchend", touch2Mouse, true);
 
-// btbutton.addEventListener("touchend", () => {
-//   navigator.bluetooth.requestDevice({ acceptAllDevices: true });
-// });
+function touch2Mouse(e) {
+  var theTouch = e.changedTouches[0];
+  var mouseEv;
 
-// btbutton.addEventListener("touchend", getEspData());
-// btbutton.addEventListener("pointerup", getEspData());
-//
+  switch (e.type) {
+    case "touchstart":
+      mouseEv = "mousedown";
+      break;
+    case "touchend":
+      mouseEv = "mouseup";
+      break;
+    case "touchmove":
+      mouseEv = "mousemove";
+      break;
+    default:
+      return;
+  }
+
+  var mouseEvent = document.createEvent("MouseEvent");
+  mouseEvent.initMouseEvent(
+    mouseEv,
+    true,
+    true,
+    window,
+    1,
+    theTouch.screenX,
+    theTouch.screenY,
+    theTouch.clientX,
+    theTouch.clientY,
+    false,
+    false,
+    false,
+    false,
+    0,
+    null
+  );
+  theTouch.target.dispatchEvent(mouseEvent);
+
+  e.preventDefault();
+}
+
+let adsrevbutton = document.getElementById("adsRevSwitch");
+let eadilockbutton = document.getElementById("eadiLockSwitch");
+
+eadilockbutton.addEventListener("pointerup", () => {
+  eadilock();
+});
+
+adsrevbutton.addEventListener("pointerup", () => {
+  adsrev();
+});
+
 document.addEventListener(
   "click",
   function enableNoSleep() {
@@ -25,10 +67,6 @@ document.addEventListener(
   },
   false
 );
-
-// function tryBluetooth() {
-//   navigator.bluetooth.requestDevice();
-// }
 
 // window.addEventListener("devicemotion", (event) => {
 //   let combinedText =
@@ -42,18 +80,19 @@ document.addEventListener(
 //   console.log(`${event.acceleration.x} m/s2`);
 // });
 
-// setInterval(getEspData(),1000)
-// window.adcVoltageList = adcVoltageList;
-// window.getAdsData = getADSData;
-
 window.addEventListener("load", (event) => {
   enableADC();
 });
 
-// window.enableADC = enableADC;
+function eadilock() {
+  alert("onclick works");
+}
 
-window.outputforrender = outputforrender();
+function adsrev() {
+  changeADS();
+}
+
 setTimeout(() => {
-  window.requestAnimationFrame(drawAll);
   start();
+  window.requestAnimationFrame(drawAll);
 }, 1000);

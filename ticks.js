@@ -6,7 +6,7 @@ function setTicks(start, end, step) {
 
 const ticks = {
   airSpeedTicks: setTicks(30, 280, 10),
-  altFeetTicks: setTicks(-2000, 40000, 500),
+  altFeetTicks: setTicks(-2000, 40000, 100),
 };
 
 export { ticks };

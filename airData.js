@@ -7,17 +7,17 @@ let adcVoltageList = {
 };
 
 let calVals = {
-  adc1s1max,
-  adc1s1min,
-  adc1s2max,
-  adc1s2min,
-  adc2s1max,
-  adc2s1min,
-  adc2s2max,
-  adc2s2min,
-  calMax,
-  calMin,
-  length,
+  adc1s1max:0,
+  adc1s1min:0,
+  adc1s2max:0,
+  adc1s2min:0,
+  adc2s1max:0,
+  adc2s1min:0,
+  adc2s2max:0,
+  adc2s2min:0,
+  calMax:0,
+  calMin:0,
+  length:0,
 };
 
 function numCalVals() {

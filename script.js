@@ -1,5 +1,5 @@
-import { drawAll, changeADS } from "./draw.js";
 import { enableADC, start, debug } from "./airData.js";
+import { drawAll, changeADS } from "./draw.js";
 
 var noSleep = new NoSleep();
 

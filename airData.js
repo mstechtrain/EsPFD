@@ -7,17 +7,17 @@ let adcVoltageList = {
 };
 
 let calVals = {
-  adc1s1max:0,
-  adc1s1min:0,
-  adc1s2max:0,
-  adc1s2min:0,
-  adc2s1max:0,
-  adc2s1min:0,
-  adc2s2max:0,
-  adc2s2min:0,
-  calMax:0,
-  calMin:0,
-  length:0,
+  adc1s1max: 0,
+  adc1s1min: 0,
+  adc1s2max: 0,
+  adc1s2min: 0,
+  adc2s1max: 0,
+  adc2s1min: 0,
+  adc2s2max: 0,
+  adc2s2min: 0,
+  calMax: 0,
+  calMin: 0,
+  length: 0,
 };
 
 function numCalVals() {
@@ -58,7 +58,7 @@ let aSchange = -0.1;
 let aFchange = -200;
 
 function getEspData() {
-  fetch("http://192.168.1.36/data", {
+  fetch("http://192.168.1.1/data", {
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => {
@@ -114,7 +114,8 @@ function updateData(dataIn) {
 
   calculatePress();
   calculateAlt();
-  calculateAirSpeed();
+  calculateAirSpeed("q400adc2");
+  // calculateAirSpeedTest();
   // console.log(airData);
 }
 
@@ -152,37 +153,63 @@ function calculatePress() {
 function calculateAlt() {
   let temp = 15;
   airData.adc1altFeet = Math.round(
-    (((Math.pow(1013.25 / adcPress.adc1s1, 1 / 5.257) - 1.0) *
+    (((Math.pow(1013.25 / adcPress.adc1s2, 1 / 5.257) - 1.0) *
       (temp + 273.15)) /
       0.0065) *
       3.28084
   );
   airData.adc2altFeet = Math.round(
-    (((Math.pow(1013.25 / adcPress.adc2s1, 1 / 5.257) - 1.0) *
+    (((Math.pow(1013.25 / adcPress.adc2s2, 1 / 5.257) - 1.0) *
       (temp + 273.15)) /
       0.0065) *
       3.28084
   );
 }
 
-function calculateAirSpeed() {
+function calculateAirSpeed(mode) {
   let airDensity = 1.204;
-  if (adcPress.adc1s2 > adcPress.adc1s1) {
-    airData.adc1airSpeed = Math.sqrt(
-      (2 * (adcPress.adc1s2 - adcPress.adc1s1)) / airDensity
+
+  let testvalue = adcPress.adc2s2;
+
+  let adc1pitot = adcPress.adc1s1,
+    adc1static = adcPress.adc1s2,
+    adc2pitot = adcPress.adc2s1,
+    adc2static = adcPress.adc2s2;
+
+  // if (testvalue) {
+  //   adc1pitot = testvalue -3;
+  //   adc1static = testvalue;
+  //   adc2pitot = testvalue - 3;
+  //   adc2static = testvalue;
+  // }
+
+  if (mode == "q400adc1") {
+    adc2static = adc1static;
+  } else if (mode == "q400adc2") {
+    adc1static = adc2static;
+  } else {};
+
+  if (adc1pitot > adc1static) {
+    airData.adc1airSpeed = Math.round(
+      Math.sqrt(1000 * (adc1pitot - adc1static)) / airDensity
     );
   } else {
-    let neg = Math.sqrt((2 * (adcPress.adc1s1 - adcPress.adc1s2)) / airDensity);
+    let neg = Math.round(
+      Math.sqrt(1000 * (adc1static - adc1pitot)) / airDensity
+    );
     airData.adc1airSpeed = -neg;
   }
-  if (adcPress.adc2s2 > adcPress.adc2s1) {
-    airData.adc2airSpeed = Math.sqrt(
-      (2 * (adcPress.adc2s2 - adcPress.adc2s1)) / airDensity
+  if (adc2pitot > adc2static) {
+    airData.adc2airSpeed = Math.round(
+      Math.sqrt(1000 * (adc2pitot - adc2static)) / airDensity
     );
   } else {
-    let neg = Math.sqrt((2 * (adcPress.adc2s1 - adcPress.adc2s2)) / airDensity);
+    let neg = Math.round(
+      Math.sqrt(1000 * (adc2static - adc2pitot)) / airDensity
+    );
     airData.adc2airSpeed = -neg;
   }
+  console.log(airData);
 }
 
 function calculateVSI() {

@@ -75,6 +75,7 @@ function drawAirSpeedTicks() {
     spread = 10;
 
   ctxaS.fillStyle = colors.ticks;
+  // console.log(currentData.airSpeed);
   ctxaS.textBaseline = "middle";
   ctxaS.font = "26pt Share";
   ctxaS.textAlign = "center";
@@ -293,14 +294,15 @@ function changeADS() {
 }
 
 async function drawAll() {
-  currentData = await outputforrender(ads);
-
+  if (!ads) {
+    currentData = await outputforrender(0);
+  } else currentData = await outputforrender(ads);
   drawEADI();
   drawAirSpeed();
   drawAltFeet();
   drawVSI();
 
-  document.getElementById("label").innerText = JSON.stringify(currentData);
+  // document.getElementById("label").innerText = JSON.stringify(currentData);
 
   window.requestAnimationFrame(drawAll);
 }
